@@ -69,6 +69,24 @@ class Api::V1::BioPushController < ApplicationController
     end
   end
 
+  def confirm_all
+    bio_pushes = BioPush.where(confirmed_at: nil)
+    bio_pushes.each do |bio_push|
+      bio_push.confirmed_at = Time.now
+      bio_push.save
+    end
+    render status: 200, json: bio_pushes
+  end
+
+  def cancel_all
+    bio_pushes = BioPush.where.not(confirmed_at: nil)
+    bio_pushes.each do |bio_push|
+      bio_push.confirmed_at = nil
+      bio_push.save
+    end
+    render status: 200, json: bio_pushes
+  end
+
   def cancel
     if params[:request_id] != nil
       bio_push = BioPush.find_or_create_by(request_id: params[:request_id])
