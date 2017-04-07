@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       resources :bio_push do
         collection do
           get :push
+          get :cancel
+          get :confirm
         end
       end
       resources :test

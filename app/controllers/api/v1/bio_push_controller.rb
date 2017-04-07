@@ -53,6 +53,38 @@ class Api::V1::BioPushController < ApplicationController
     end
   end
 
+  def confirm
+    if params[:request_id] != nil
+      bio_push = BioPush.find_or_create_by(request_id: params[:request_id])
+    else
+      bio_push = BioPush.create
+    end
+    bio_push.confirmed_at = Time.now
+    bio_push.save
+    # render status: 200, json: bio_push
+    if bio_push.confirmed_at.nil?
+      render text: "#{bio_push.request_id},0"
+    else
+      render text: "#{bio_push.request_id},1"
+    end
+  end
+
+  def cancel
+    if params[:request_id] != nil
+      bio_push = BioPush.find_or_create_by(request_id: params[:request_id])
+    else
+      bio_push = BioPush.create
+    end
+    bio_push.confirmed_at = nil
+    bio_push.save
+    # render status: 200, json: bio_push
+    if bio_push.confirmed_at.nil?
+      render text: "#{bio_push.request_id},0"
+    else
+      render text: "#{bio_push.request_id},1"
+    end
+  end
+
   def bio_push_params
     params.require(:bio_push).permit(:request_id, :confirmed_at)
   end
