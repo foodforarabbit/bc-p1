@@ -45,7 +45,12 @@ class Api::V1::BioPushController < ApplicationController
     else
       bio_push = BioPush.create
     end
-    render status: 200, json: bio_push
+    # render status: 200, json: bio_push
+    if bio_push.confirmed_at.nil?
+      render text: "#{bio_push.request_id},0"
+    else
+      render text: "#{bio_push.request_id},1"
+    end
   end
 
   def bio_push_params
