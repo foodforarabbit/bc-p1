@@ -1,4 +1,4 @@
-class Api::V1::BioPushesController < ApplicationController
+class Api::V1::BioPushController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound do
     render status: 410, head: nil
   end
