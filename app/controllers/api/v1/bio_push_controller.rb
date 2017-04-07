@@ -47,9 +47,9 @@ class Api::V1::BioPushController < ApplicationController
     end
     # render status: 200, json: bio_push
     if bio_push.confirmed_at.nil?
-      render text: "#{bio_push.request_id},0"
+      render plain: "#{bio_push.request_id},0"
     else
-      render text: "#{bio_push.request_id},1"
+      render plain: "#{bio_push.request_id},1"
     end
   end
 
@@ -63,9 +63,9 @@ class Api::V1::BioPushController < ApplicationController
     bio_push.save
     # render status: 200, json: bio_push
     if bio_push.confirmed_at.nil?
-      render text: "#{bio_push.request_id},0"
+      render plain: "#{bio_push.request_id},0"
     else
-      render text: "#{bio_push.request_id},1"
+      render plain: "#{bio_push.request_id},1"
     end
   end
 
@@ -79,9 +79,9 @@ class Api::V1::BioPushController < ApplicationController
     bio_push.save
     # render status: 200, json: bio_push
     if bio_push.confirmed_at.nil?
-      render text: "#{bio_push.request_id},0"
+      render plain: "#{bio_push.request_id},0"
     else
-      render text: "#{bio_push.request_id},1"
+      render plain: "#{bio_push.request_id},1"
     end
   end
 
