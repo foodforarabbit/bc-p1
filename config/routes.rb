@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :timecards
       resources :time_entries
+      resources :test
     end
   end
 end
