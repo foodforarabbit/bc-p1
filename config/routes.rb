@@ -4,7 +4,13 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :timecards
       resources :time_entries
+      resources :bio_push do
+        collection do
+          get :push
+        end
+      end
       resources :test
     end
   end
+  resources :bio_push
 end
